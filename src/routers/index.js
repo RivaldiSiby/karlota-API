@@ -3,8 +3,10 @@ const Router = express.Router();
 
 // Route list
 const userRoute = require("./users");
+const authRoute = require("./auth");
 // Endpoint API List
 Router.use("/users", userRoute);
+Router.use("/auth", authRoute);
 // Welcome end Point
 Router.get("/", (req, res) => {
   res.status(200).send({

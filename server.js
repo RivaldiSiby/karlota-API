@@ -7,6 +7,7 @@ const cors = require("cors");
 // connect
 const mainRouter = require("./src/routers/index");
 const db = require("./src/config/orm/db");
+const { redisConnect } = require("./src/config/cache/redis");
 
 // logger
 const logger = require("morgan");
@@ -16,6 +17,7 @@ const init = async () => {
     // connect
     await db.authenticate();
     await db.sync({ alter: true });
+    await redisConnect();
     // info connect
     console.log("All connect has been connected");
     // logger

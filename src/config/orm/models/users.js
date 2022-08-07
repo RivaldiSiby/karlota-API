@@ -2,25 +2,38 @@ const { Sequelize, DataTypes } = require("sequelize");
 const db = require("../db");
 
 const User = db.define(
-  "User",
+  "users",
   {
-    Name: {
+    id: {
+      type: DataTypes.STRING,
+      primaryKey: true,
+      allowNull: false,
+    },
+    name: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    Email: {
+    email: {
       type: DataTypes.STRING,
       allowNull: false,
+      isEmail: true,
+      unique: {
+        msg: { validationError: "Email is already used" },
+      },
     },
-    Password: {
+    password: {
       type: DataTypes.TEXT,
       allowNull: false,
     },
-    Gender: {
+    gender: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    Description: {
+    description: {
+      type: DataTypes.TEXT,
+      allowNull: true,
+    },
+    img: {
       type: DataTypes.TEXT,
       allowNull: true,
     },
