@@ -1,4 +1,5 @@
 require("dotenv").config();
+const cookieParser = require("cookie-parser");
 // express
 const express = require("express");
 const server = express();
@@ -28,6 +29,7 @@ const init = async () => {
     }
     // body payload
     server.use(express.json());
+    server.use(cookieParser());
     server.use(express.urlencoded({ extended: true }));
     // cors
     const corsOptions = {

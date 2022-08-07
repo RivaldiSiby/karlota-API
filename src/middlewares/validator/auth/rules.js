@@ -13,8 +13,10 @@ const rulesRegis = Joi.object({
   gender: Joi.string().valid("male", "female").required(),
 });
 const rulesLogin = Joi.object({
-  email: Joi.string().required().email(),
+  email: Joi.string().required(),
   password: JoiPassword.string().required(),
+  device: Joi.string().required(),
+  notification_token: Joi.string(),
 });
 
 module.exports = { rulesRegis, rulesLogin };

@@ -9,12 +9,12 @@ const Auth = db.define(
       primaryKey: true,
     },
     refresh_token: {
-      type: DataTypes.STRING,
+      type: DataTypes.TEXT,
       allowNull: false,
     },
     notifcation_token: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
     },
     device: {
       type: DataTypes.STRING,
