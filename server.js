@@ -1,5 +1,4 @@
 require("dotenv").config();
-const cookieParser = require("cookie-parser");
 // express
 const express = require("express");
 const server = express();
@@ -12,6 +11,7 @@ const { redisConnect } = require("./src/config/cache/redis");
 
 // logger
 const logger = require("morgan");
+const { cloudinaryConfig } = require("./src/config/cloud/cloudinary");
 
 const init = async () => {
   try {
@@ -29,7 +29,6 @@ const init = async () => {
     }
     // body payload
     server.use(express.json());
-    server.use(cookieParser());
     server.use(express.urlencoded({ extended: true }));
     // cors
     const corsOptions = {
@@ -38,6 +37,8 @@ const init = async () => {
       allowedHeaders: ["Content-Type", "Authorization"],
     };
     server.use(cors(corsOptions));
+    // cloudinary
+    server.use(cloudinaryConfig);
     // Router
     server.use(mainRouter);
     // start server

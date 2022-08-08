@@ -1,7 +1,7 @@
 const response = require("../../../helpers/response/response");
 const { rulesLogin, rulesRegis } = require("./rules");
 
-authValidator = {};
+const authValidator = {};
 
 authValidator.regis = (req, res, next) => {
   const result = rulesRegis.validate(req.body);

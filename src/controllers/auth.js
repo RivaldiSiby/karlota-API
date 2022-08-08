@@ -25,7 +25,10 @@ auth.login = async (req, res) => {
     const { email, password, device, notification_token = null } = req.body;
     // check email and pass
     const user = await authModel.findUserByEmail(email);
-    await bcrypt.compare(password, user.password);
+    const checkpass = await bcrypt.compare(password, user.password);
+    if (!checkpass) {
+      throw new ClientError("Email is not registered Or Password is Wrong");
+    }
     // user data
     const data = {
       id: user.id,
