@@ -71,6 +71,7 @@ auth.getAuth = async (id) => {
     }
     return result;
   } catch (error) {
+    console.log(error);
     throw new Error(error.message);
   }
 };
@@ -86,6 +87,10 @@ auth.findUserByEmail = async (email) => {
     }
     return result;
   } catch (error) {
+    console.log(error);
+    if (error instanceof ClientError) {
+      throw new ClientError(error.message);
+    }
     throw new Error(error.message);
   }
 };

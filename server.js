@@ -28,8 +28,13 @@ const init = async () => {
       );
     }
     // body payload
+
+    // parse application/json
     server.use(express.json());
+    // handler/middleware urlencoded
+    // parse application/x-www-form-urlencoded
     server.use(express.urlencoded({ extended: true }));
+
     // cors
     const corsOptions = {
       origin: ["http://localhost:3000"],

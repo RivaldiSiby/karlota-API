@@ -1,18 +1,22 @@
+const deleteFile = require("../../../helpers/files/delete");
 const response = require("../../../helpers/response/response");
 const { rulesUpdatePassword, rulesUpdateProfile } = require("./rules");
 
-const usersValidator = {};
+const userValidator = {};
 
-usersValidator.profile = (req, res, next) => {
-  console.log(req.body);
+userValidator.profile = (req, res, next) => {
   const result = rulesUpdateProfile.validate(req.body);
   if (result.error) {
+    const { file = null } = req;
+    if (file !== null) {
+      deleteFile(file.path);
+    }
     return response.error(res, 400, result.error.message);
   }
   console.log(result);
   next();
 };
-usersValidator.password = (req, res, next) => {
+userValidator.password = (req, res, next) => {
   const result = rulesUpdatePassword.validate(req.body);
   if (result.error) {
     return response.error(res, 400, result.error.message);
@@ -20,4 +24,4 @@ usersValidator.password = (req, res, next) => {
   next();
 };
 
-module.exports = usersValidator;
+module.exports = userValidator;

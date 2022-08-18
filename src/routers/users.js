@@ -3,21 +3,21 @@ const users = require("../models/users");
 const auth = require("../middlewares/auth/auth");
 const imgUpload = require("../middlewares/files/upload");
 const usersControllers = require("../controllers/users");
-const usersValidator = require("../middlewares/validator/users");
+const userValidator = require("../middlewares/validator/users");
 const Router = express.Router();
 
 // endpoint list
-Router.post(
+Router.patch(
   "/profile",
-  // auth.verifyToken,
-  usersValidator.profile,
+  auth.verifyToken,
   imgUpload.single("img"),
+  userValidator.profile,
   usersControllers.updateProfile
 );
 Router.patch(
   "/password",
-  // auth.verifyToken,
-  usersValidator.password,
+  auth.verifyToken,
+  userValidator.password,
   usersControllers.updatePassword
 );
 

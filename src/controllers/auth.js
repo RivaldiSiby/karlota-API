@@ -111,7 +111,7 @@ auth.refreshToken = async (req, res) => {
     );
   } catch (error) {
     if (error.name === "TokenExpiredError") {
-      await authModel.deleteAuth(req.user.id);
+      await authModel.deleteAuth(req.params.id);
       return response.error(res, 401, "You need to Sign in again");
     }
     if (error instanceof ClientError) {

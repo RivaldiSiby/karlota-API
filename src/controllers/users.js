@@ -7,6 +7,7 @@ const users = {};
 
 users.updateProfile = async (req, res) => {
   try {
+    console.log(req.body);
     const { user, body, file = null } = req;
     const result = await usersModel.updateUser(body, file, user.id);
     if (result === 0) {
